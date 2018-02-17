@@ -44,13 +44,15 @@ public class Tee {
             if (arg.equals("-a")) {
                 flagAppend = true;
             } else if (arg.charAt(0) == '-' && arg.length() > 1) {
-                if (arg.equals("--help")) {
-                    System.out.println(USAGE);
-                    System.exit(0);
-                } else if (arg.equals("--append")) {
-                  flagAppend = true;
-                } else {
-                    throw new ArgumentParseException("Unsupported flag.\nUsage: " + USAGE);
+                switch (arg) {
+                    case "--help":
+                        System.out.println(USAGE);
+                        System.exit(0);
+                    case "--append":
+                        flagAppend = true;
+                        break;
+                    default:
+                        throw new ArgumentParseException("Unsupported flag.\nUsage: " + USAGE);
                 }
             } else {
                 files.add(arg);
