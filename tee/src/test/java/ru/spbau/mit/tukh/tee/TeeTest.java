@@ -6,9 +6,12 @@ import org.junit.rules.ExpectedException;
 
 import java.io.*;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class TeeTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
     private String[] arguments;
     private ByteArrayOutputStream outContent;
 
@@ -18,9 +21,6 @@ public class TeeTest {
         System.setOut(new PrintStream(outContent));
         this.arguments = arguments;
     }
-
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void testMainWithoutFiles() {

@@ -8,11 +8,12 @@ import java.util.ArrayList;
  * Reads standard input and writes it to both standard output and one or more files.
  */
 public class Tee {
+    static final int BUF_SIZE = 1024;
+    private static final String USAGE = "tee [ -a | --append] [ --help ] [ File ... ]\n\t-a | " +
+            "--append = append to file\n\t--help = show help and exit" +
+            "\n\tFile = one or more filenames";
     private ArrayList<String> files = new ArrayList<>();
     private boolean flagAppend;
-
-    private static final String USAGE = "tee [ -a | --append] [ --help ] [ File ... ]\n\t-a | --append = append to file\n\t--help=show help and exit";
-    static final int BUF_SIZE = 1024;
 
     /**
      * Main method, which does everything.
