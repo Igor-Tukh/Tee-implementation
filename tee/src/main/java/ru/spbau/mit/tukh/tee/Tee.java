@@ -11,7 +11,7 @@ public class Tee {
     private ArrayList<String> files = new ArrayList<>();
     private boolean flagAppend;
 
-    private static final String USAGE = "tee [ -a ] [ --help ] [ File ... ]\n\t-a = append to file\n\thelp=show help and exit";
+    private static final String USAGE = "tee [ -a | --append] [ --help ] [ File ... ]\n\t-a | --append = append to file\n\t--help=show help and exit";
     static final int BUF_SIZE = 1024;
 
     /**
@@ -47,6 +47,8 @@ public class Tee {
                 if (arg.equals("--help")) {
                     System.out.println(USAGE);
                     System.exit(0);
+                } else if (arg.equals("--append")) {
+                  flagAppend = true;
                 } else {
                     throw new ArgumentParseException("Unsupported flag.\nUsage: " + USAGE);
                 }
