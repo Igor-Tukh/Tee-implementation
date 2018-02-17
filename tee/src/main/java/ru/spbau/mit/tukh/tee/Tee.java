@@ -16,6 +16,7 @@ public class Tee {
 
     /**
      * Main method, which does everything.
+     *
      * @param args should content
      *             flag -a to append input to files
      *             flag --help to show help and exit.
@@ -39,15 +40,14 @@ public class Tee {
     }
 
     private void parseArguments(String[] args) throws ArgumentParseException {
-        for (String arg: args) {
+        for (String arg : args) {
             if (arg.equals("-a")) {
                 flagAppend = true;
             } else if (arg.charAt(0) == '-' && arg.length() > 1) {
                 if (arg.equals("--help")) {
                     System.out.println(USAGE);
                     System.exit(0);
-                }
-                else {
+                } else {
                     throw new ArgumentParseException("Unsupported flag.\nUsage: " + USAGE);
                 }
             } else {
@@ -59,7 +59,7 @@ public class Tee {
     private void printToFiles() throws IOException {
         ArrayList<BufferedWriter> bufferedWriters = new ArrayList<>();
 
-        for (String filename: files) {
+        for (String filename : files) {
             try {
                 bufferedWriters.add(new BufferedWriter(new FileWriter(filename, flagAppend)));
             } catch (IOException e) {
@@ -75,12 +75,12 @@ public class Tee {
         char[] buf = new char[BUF_SIZE];
 
         while ((length = bufferedReader.read(buf)) > 0) {
-            for(BufferedWriter bufferedWriter: bufferedWriters) {
+            for (BufferedWriter bufferedWriter : bufferedWriters) {
                 bufferedWriter.write(buf, 0, length);
             }
         }
 
-        for (BufferedWriter bufferedWriter: bufferedWriters) {
+        for (BufferedWriter bufferedWriter : bufferedWriters) {
             bufferedWriter.close();
         }
 
